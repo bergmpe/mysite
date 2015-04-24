@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+
+<project name="num-perfeito" default="local.deploy">
+  <property name="src.dir" location="src" />
+  <property name="web.dir" location="WebContent" />
+  <property name="build.dir" location="build" />
+  <property name="tests.dir" location="test" />
+  <property name="build.classes.dir" location="${build.dir}/classes" />
+  <property name="test.classes.dir" location="${build.dir}/test-classes" />
+  <property name="lib" location="lib" />
+  <property name="dist.dir" location="dist" />
+  <property name="project.name" value="num-perfeito" /><!--usado no manifesto-->
+  <property name="project.version" value="1.0" /><!--usado no manifesto-->
+  <property name="tomcat.install.dir" location="C:/apache-tomcat-8.0.20" /><!--destino no deploy-->
+
+  <path id="compile.classpath">
+    <fileset dir="${lib}" includes="*.jar" />
+    <!--referencia para os arquivos jar da pasta lib-->
+  </path>
+
+  <path id="test.compile.classpath">
+    <path refid="compile.classpath"/>
+    <!--referencia para o path acima 'compile.class' obtem os jar indiretamente-->
+    <pathelement location="${build.classes.dir}"/><!--referencia para as classes compiladas-->
+  </path>
+
+  <path id="test.classpath">
+    <path refid="test.compile.classpath"/>
+    <pathelement path="${test.classes.dir}"/>
+  </path>
+
+  <target name="init">
+    <mkdir dir="${build.classes.dir}" />
+    <mkdir dir="${test.classes.dir}" />
+    <mkdir dir="${dist.dir}" />
+  </target>
+
+  <target name="compile" depends="init" description="Compile Java code">
+    <javac srcdir="${src.dir}"
+           destdir="${build.classes.dir}"
+           classpathref="compile.classpath" />
+  </target>
+
+  <target name="compile-tests" depends="compile" description="Compile Unit Tests">
+    <javac srcdir="${tests.dir}"
+           destdir="${test.classes.dir}">
+      <classpath refid="test.compile.classpath"/>
+    </javac>
+  </target>
+
+  <target name="test" depends="compile-tests" description="Run unit tests">
+    <junit printsummary="true" haltonfailure="false"><!--corre o junit test-->
+      <classpath refid="test.classpath" />
+      <formatter type="plain"/>
+      <formatter type="xml"/>
+      <test name="com.berg.NumeroPerfeitoTest" outfile="junit-test-log"/>
+    </junit>
+  </target>
+
+  <target name="package" depends="test" description="Generate WAR file">
+    <tstamp>
+      <format property="build.date" pattern="EEEE, d MMMM yyyy"/>
+      <format property="build.time" pattern="hh:mm a"/>
+    </tstamp>
+    <war destfile="${dist.dir}/${project.name}-${project.version}.war" webxml="src/metadata/web.xml ">
+      <fileset dir="${web.dir}">
+        <include name="**/*.*"/>
+      </fileset>
+      <classes dir="${build.classes.dir}"/>
+    </war>
+  </target>
+
+  <target name="local.deploy" depends="package" description="Deploy to local Tomcat instance">
+    <copy file="${dist.dir}/${project.name}-${project.version}.war"
+      tofile="${tomcat.install.dir}/webapps/numperfeitoant.war" />
+    </target>
+  
+</project>
+  
