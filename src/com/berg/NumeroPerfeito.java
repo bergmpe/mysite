@@ -17,7 +17,7 @@ public class NumeroPerfeito extends HttpServlet{
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//super.doGet(req, resp);
-		//resp.getWriter().print("Digite um número: ");
+		//resp.getWriter().print("Digite um n\uc3a9mero: ");
 		
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
