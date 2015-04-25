@@ -62,7 +62,7 @@
       <format property="build.date" pattern="EEEE, d MMMM yyyy"/>
       <format property="build.time" pattern="hh:mm a"/>
     </tstamp>
-    <war destfile="${dist.dir}/${project.name}-${project.version}.war" webxml="${web.dir}/WEB-INF/web.xml ">
+    <war destfile="${dist.dir}/${project.name}-${project.version}.war" webxml="${web.dir}/WEB-INF/webweb.xml ">
       <fileset dir="${web.dir}">
         <include name="**/*.*"/>
       </fileset>
