@@ -69,11 +69,6 @@
       <classes dir="${build.classes.dir}"/>
     </war>
   </target>
-
-  <target name="local.deploy" depends="package" description="Deploy to local Tomcat instance">
-    <copy file="${dist.dir}/${project.name}-${project.version}.war"
-      tofile="${tomcat.install.dir}/webapps/numperfeitoant.war" />
-    </target>
   
 </project>
   
