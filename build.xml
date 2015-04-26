@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<project name="num-perfeito" default="deploy">
+<project name="num-perfeito" default="package">
   <property name="src.dir" location="src" />
   <property name="web.dir" location="WebContent" />
   <property name="build.dir" location="build" />
