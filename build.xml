@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<project name="num-perfeito" default="package">
+<project name="num-perfeito" default="deploy">
   <property name="src.dir" location="src" />
   <property name="web.dir" location="WebContent" />
   <property name="build.dir" location="build" />
@@ -68,6 +68,17 @@
       </fileset>
       <classes dir="${build.classes.dir}"/>
     </war>
+  </target>
+
+  <target name="deploy" depends="package" description="deploy to tomcat">
+    <echo>deploying from client</echo>
+    <deploy
+			url="http://192.168.1.115:8080"
+			username="deployer"
+			password="deployer"
+			path="/numero"
+			war="${dist.dir}/${project.name}-${project.version}.war"
+		/>
   </target>
   
 </project>
