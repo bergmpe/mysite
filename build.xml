@@ -12,7 +12,6 @@
   <property name="project.name" value="num-perfeito" /><!--usado no manifesto-->
   <property name="project.version" value="1.0" /><!--usado no manifesto-->
   <property name="tomcat.install.dir" location="C:/apache-tomcat-8.0.20" /><!--destino no deploy-->
-  <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
 
   <path id="compile.classpath">
     <fileset dir="${lib}" includes="*.jar" />
@@ -69,17 +68,6 @@
       </fileset>
       <classes dir="${build.classes.dir}"/>
     </war>
-  </target>
-
-  <target name="deploy" depends="package" description="deploy to tomcat">
-    <echo>deploying from client</echo>
-    <deploy
-			url="http://192.168.1.115:8080"
-			username="deployer"
-			password="deployer"
-			path="/numero"
-			war="${dist.dir}/${project.name}-${project.version}.war"
-		/>
   </target>
   
 </project>
