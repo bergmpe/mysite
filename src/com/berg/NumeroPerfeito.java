@@ -33,7 +33,7 @@ public class NumeroPerfeito extends HttpServlet{
 		if(ePerfeito( numero ))
 			out.println(" " + numero + " é perfeito.");
 		else
-			out.println(" " + numero + " n\uc3a3o \uc3a9 perfeito.");
+			out.println(" " + numero + " não é perfeito.");
 		out.println("</body></html>");
 		
 	}
